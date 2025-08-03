@@ -85,19 +85,37 @@
 }
 
 /* Product Cards */
+/* Responsive Product Card */
 .product-card {
-  transition: transform 0.3s ease;
-  border-radius: 12px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.product-card img {
+  aspect-ratio: 1/1;
+  width: 100%;
+  object-fit: cover;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
+  transform: scale(1.02);
 }
 
-.product-image {
-  height: 400px;
-  object-fit: cover;
-  border-radius: 12px;
+/* Responsive Scaling */
+@media (max-width: 768px) {
+  .product-card {
+    padding: 8px;
+  }
+  .product-card .btn {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+  .product-card p,
+  .product-card h5 {
+    font-size: 0.85rem;
+  }
 }
 
 .hover-details h5,
@@ -171,6 +189,40 @@
   color: #d97706;
 }
 
+/* ----------------- Responsive Adjustments ----------------- */
+@media (max-width: 992px) {
+  .category-icon {
+    width: 70px;
+    height: 70px;
+  }
+  .category-scroll-item {
+    min-width: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-icon {
+    width: 60px;
+    height: 60px;
+  }
+  .category-scroll-item div {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .category-scroll {
+    gap: 1rem; /* smaller spacing */
+  }
+  .category-icon {
+    width: 55px;
+    height: 55px;
+  }
+  .category-scroll-item {
+    min-width: 70px;
+  }
+}
+
 #wishlist-items .wishlist-entry {
   display: flex;
   align-items: center;
@@ -201,4 +253,50 @@
 .wishlist-entry .wishlist-text span {
   font-weight: 500;
   color: #e76f51;
+}
+
+/* Hide Top Navbar on Mobile */
+@media (max-width: 991px) {
+  .navbar {
+    display: none !important;
+  }
+}
+
+/* Bottom Navigation (Mobile Only) */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 6px 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.bottom-nav a {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #333;
+  text-decoration: none;
+}
+
+.bottom-nav i {
+  display: block;
+  font-size: 1.3rem;
+  margin-bottom: 2px;
+}
+
+.bottom-nav .cart-badge {
+  position: absolute;
+  top: 2px;
+  right: 20px;
+  background: red;
+  color: white;
+  font-size: 0.65rem;
+  border-radius: 50%;
+  padding: 2px 5px;
 }
