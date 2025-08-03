@@ -54,6 +54,61 @@
         </div>
     </nav>
 
+    <!-- Responsive Navbar -->
+    <nav class="mobile-navbar">
+        <div id="searchBar" class="search-bar">
+            <input type="text" placeholder="Search for products..." />
+            <button id="closeSearch">&times;</button>
+        </div>
+        <div id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h2>Filters</h2>
+                <button id="closeSidebar">&times;</button>
+            </div>
+
+            <div class="sidebar-content">
+                <!-- Color Filter -->
+                <div class="filter-section">
+                    <h3>Color</h3>
+                    <label><input type="checkbox" name="color" value="red"> Red</label><br>
+                    <label><input type="checkbox" name="color" value="blue"> Blue</label><br>
+                    <label><input type="checkbox" name="color" value="green"> Green</label><br>
+                    <label><input type="checkbox" name="color" value="black"> Black</label>
+                </div>
+
+                <!-- Price Filter -->
+                <div class="filter-section">
+                    <h3>Price</h3>
+                    <label><input type="radio" name="price" value="0-500"> ₹0 - ₹500</label><br>
+                    <label><input type="radio" name="price" value="500-1000"> ₹500 - ₹1000</label><br>
+                    <label><input type="radio" name="price" value="1000-2000"> ₹1000 - ₹2000</label><br>
+                    <label><input type="radio" name="price" value="2000+"> ₹2000+</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overlay (when menu is open) -->
+        <div id="overlay" class="overlay"></div>
+
+        <div class="nav-left">
+            <button class="menu-btn">&#9776;</button> <!-- Hamburger -->
+        </div>
+
+        <div class="nav-center">
+            <a class="navbar-brand mx-auto fw-bold text-dark fs-4 d-flex align-items-center nav-anim" href="index.html">
+                <div class="logo-dot me-2"></div> MaggiesClay
+            </a>
+        </div>
+
+        <div class="nav-right">
+            <button class="search-btn">&#128269;</button> <!-- Search icon -->
+            <button class="cart-btn" data-bs-toggle="offcanvas" data-bs-target="#cartModal">
+                🛒 <span class="cart-count-mobile">0</span>
+            </button>
+        </div>
+
+
+    </nav>
 
 
     <!-- Landing Carousel -->
@@ -84,7 +139,7 @@
     </div> -->
 
     <!-- Hero Section -->
-    <section class="text-center py-5 mt-5 hero-section">
+    <section class="text-center py-5  hero-section">
         <div class="container">
             <h1 class="display-4 fw-bold">Handmade Clay Jewellery</h1>
             <p class="lead">Unique. Elegant. Handmade with love.</p>
@@ -321,7 +376,7 @@
     </section>
 
     <!-- Bottom Navigation (Mobile Only) -->
-    <nav class="bottom-nav d-lg-none">
+    <!-- <nav class="bottom-nav d-lg-none">
         <a href="index.html"><i class="bi bi-house"></i><span>Home</span></a>
         <a href="#shop"><i class="bi bi-search"></i><span>Shop</span></a>
         <a href="#deals"><i class="bi bi-tag"></i><span>Deals</span></a>
@@ -331,7 +386,8 @@
         <a href="#" class="position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartModal">
             <i class="bi bi-cart"></i><span>Cart</span>
         </a>
-    </nav>
+    </nav> -->
+
 
 
 
@@ -432,7 +488,14 @@
         }
 
         function updateCartDisplay() {
-            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            // Update desktop
+            cartCount.textContent = totalItems;
+
+            // Update mobile
+            const mobileCart = document.querySelector(".cart-count-mobile");
+            if (mobileCart) mobileCart.textContent = totalItems;
 
             if (cart.length === 0) {
                 cartItems.innerHTML = "<p>Your cart is empty.</p>";
@@ -577,8 +640,44 @@
         updateWishlistDisplay();
         loadWishlistState();
 
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const menuBtn = document.querySelector('.menu-btn');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        const searchBtn = document.querySelector('.search-btn');
+        const searchBar = document.getElementById('searchBar');
+        const closeSearch = document.getElementById('closeSearch');
+
+        // Sidebar Open
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        // Sidebar Close
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Search Bar Open
+        searchBtn.addEventListener('click', () => {
+            searchBar.classList.add('active');
+        });
+
+        // Search Bar Close
+        closeSearch.addEventListener('click', () => {
+            searchBar.classList.remove('active');
+        });
 
     </script>
+
 
 </body>
 
